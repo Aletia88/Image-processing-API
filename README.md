@@ -32,7 +32,7 @@ To use the Image Processor API, send a request to the endpoint with the followin
 
 **height** : The intended height of the image file to be returned
 
-###### Example - http://localhost:3000/image?filename=encenadaport&width=100&height=100
+###### Example - http://localhost:3000/api/image?filename=encenadaport&width=100&height=100
 
 Expected query arguments are:
 

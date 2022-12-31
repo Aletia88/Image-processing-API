@@ -19,9 +19,3 @@ it('checks for correct query parameters name', async () => {
 
   expect(response.status).toBe(200);
 });
-
-it('checks for valid input', async () => {
-  const response: supertest.Response = await request.get('/api/images?filename=fjord&width=200&height=200');
-
-  expect(response.status).toBe(200);
-});

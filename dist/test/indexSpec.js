@@ -27,7 +27,3 @@ it('checks for correct query parameters name', () => __awaiter(void 0, void 0, v
     const response = yield request.get('/api/images?filename=fjord');
     expect(response.status).toBe(200);
 }));
-it('checks for valid input', () => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield request.get('/api/images?filename=fjord&width=200&height=200');
-    expect(response.status).toBe(200);
-}));

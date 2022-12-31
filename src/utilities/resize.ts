@@ -5,4 +5,5 @@ export async function resizeImage(filename: string, width: number, height: numbe
   await sharp(`src/images/images/${filename}.jpg`)
     .resize(width, height)
     .toFile(`src/images/thumb/${filename}-${width}-${height}.jpg`);
+  return `src/images/thumb/${filename}-${width}-${height}.jpg`;
 }
