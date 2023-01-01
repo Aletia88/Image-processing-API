@@ -8,9 +8,12 @@ route.get(
 
   (req: { query: { filename: string; width: number; height: number } }, res) => {
     const url = `/src/images/thumb/${req.query.filename}-${req.query.width}-${req.query.height}.jpg`;
+
     if (Object.keys(req.query).length > 3) {
       res.send('please enter only filename, width and height of the image');
-    } else if (req.query.filename == undefined || req.query.width == undefined || req.query.height == undefined) {
+    }
+    
+    else if (req.query.filename == undefined || req.query.width == undefined || req.query.height == undefined) {
       res.send('Sorry There is a missing parameter ');
     } else if (isNaN(req.query.width) || req.query.width < 1) {
       res.send('width can only be a postive number');
@@ -18,14 +21,20 @@ route.get(
       res.send('height can only be a postive number');
     } else if (fs.existsSync(url)) {
       res.sendFile(process.cwd() + url);
-    } else {
+    }else if(req.query.filename !== 'fjord'  &&  req.query.filename !== 'icelandwaterfall' && req.query.filename !== 'palmtunnel' && req.query.filename !== 'santamonica' && req.query.filename !== 'encenadaport') {
+      res.send('File name does not exist')
+    }
+    else{
       resizeImage(req.query.filename, Number(req.query.width), Number(req.query.height));
 
       setTimeout(() => {
         res.sendFile(process.cwd() + url);
-      }, 1000);
+      }, 1000);}
+      // else if (!fs.existsSync(`/src/images/images/${req.query.filename}.jpg`)) {
+      //   res.send('File name does not exist');
+      // }
     }
-  }
+  
 );
 
 export default route;
