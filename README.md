@@ -46,7 +46,7 @@ width: numerical pixel value > 0
 height: numerical pixel value > 0
 
 
-
+#### endpoint http://localhost:3000/api/image?filename=fjord&width=200&height=200
 
 ##### Error messages:
 

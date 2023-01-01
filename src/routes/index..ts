@@ -8,11 +8,8 @@ route.get(
 
   (req: { query: { filename: string; width: number; height: number } }, res) => {
     const url = `/src/images/thumb/${req.query.filename}-${req.query.width}-${req.query.height}.jpg`;
-    const imageUrl = `/src/images/images/${req.query.filename}.jpg`;
     if (Object.keys(req.query).length > 3) {
       res.send('please enter only filename, width and height of the image');
-    } else if (!fs.existsSync(imageUrl)) {
-      res.send('Please enter the correct file name');
     } else if (req.query.filename == undefined || req.query.width == undefined || req.query.height == undefined) {
       res.send('Sorry There is a missing parameter ');
     } else if (isNaN(req.query.width) || req.query.width < 1) {
@@ -21,11 +18,12 @@ route.get(
       res.send('height can only be a postive number');
     } else if (fs.existsSync(url)) {
       res.sendFile(process.cwd() + url);
-    } else if (!fs.existsSync(url) && req.query.filename) {
-      resizeImage(req.query.filename, Number(req.query.width), Number(req.query.height));
-      res.sendFile(process.cwd() + url);
     } else {
-      res.sendFile("can't find the image");
+      resizeImage(req.query.filename, Number(req.query.width), Number(req.query.height));
+
+      setTimeout(() => {
+        res.sendFile(process.cwd() + url);
+      }, 1000);
     }
   }
 );
